@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_puthex_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gharazka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 19:15:23 by gharazka          #+#    #+#             */
-/*   Updated: 2023/10/24 19:15:24 by gharazka         ###   ########.fr       */
+/*   Created: 2023/11/16 20:47:17 by gharazka          #+#    #+#             */
+/*   Updated: 2023/11/16 20:47:36 by gharazka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+int	ft_puthex_fd(unsigned long long int n, unsigned long int temp, int len)
 {
-	int		size;
-	int		i;
-	char	*dest;
-
-	i = 0;
-	size = ft_strlen(s);
-	dest = (char *)malloc(size + 1);
-	while (s[i] != 0)
+	while (n >= 16)
 	{
-		dest[i] = s[i];
-		i++;
+		temp = n / 16;
+		n = n - (16 * temp);
 	}
-	dest[i] = 0;
-	return (dest);
+	len++;
+	if (temp > 0)
+		len = ft_puthex_fd(temp, 0, len);
+	if (n <= 9)
+		ft_putnbr_fd(n, 1, 0);
+	if (n > 9)
+		ft_putchar_fd(n + 'W', 1);
+	return (len);
 }

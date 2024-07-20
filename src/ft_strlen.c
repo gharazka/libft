@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gharazka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 13:54:51 by gharazka          #+#    #+#             */
-/*   Updated: 2023/10/18 14:06:09 by gharazka         ###   ########.fr       */
+/*   Created: 2023/10/17 21:47:57 by gharazka          #+#    #+#             */
+/*   Updated: 2023/10/25 18:42:47 by gharazka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+size_t	ft_strlen(const char *str)
 {
-	char	*full;
-	int		i;
-	int		j;
+	int	i;
 
-	full = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
+		return (0);
 	i = 0;
-	j = 0;
-	while (s1[i] != 0)
-	{
-		full[i] = s1[i];
+	while (str[i] != '\0')
 		i++;
-	}
-	while (s2[j] != 0)
-	{
-		full[i + j] = s2[j];
-		j++;
-	}
-	full[i + j] = 0;
-	return (full);
+	return (i);
 }

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putmemory_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gharazka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 19:26:23 by gharazka          #+#    #+#             */
-/*   Updated: 2023/10/26 20:20:03 by gharazka         ###   ########.fr       */
+/*   Created: 2023/11/16 20:56:28 by gharazka          #+#    #+#             */
+/*   Updated: 2023/11/16 21:10:12 by gharazka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdint.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	ft_putmemory_fd(unsigned long long int n)
 {
-	void	*result_ptr;
+	int	len;
 
-	if (nmemb == 0 || size == 0)
+	len = 0;
+	if (!n)
 	{
-		result_ptr = malloc(0);
-		return (result_ptr);
+		ft_putstr_fd("(nil)", 1);
+		return (5);
 	}
-	if (nmemb > SIZE_MAX / size)
-		return (NULL);
-	result_ptr = malloc(size * nmemb);
-	if (!result_ptr)
-		return (NULL);
-	result_ptr = ft_bzero(result_ptr, nmemb * size);
-	return (result_ptr);
+	ft_putstr_fd("0x", 1);
+	len += 2;
+	len += ft_puthex_fd(n, 0, 0);
+	return (len);
 }

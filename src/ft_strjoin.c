@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gharazka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 12:50:27 by gharazka          #+#    #+#             */
-/*   Updated: 2023/10/18 14:04:41 by gharazka         ###   ########.fr       */
+/*   Created: 2023/10/18 13:54:51 by gharazka          #+#    #+#             */
+/*   Updated: 2023/10/18 14:06:09 by gharazka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd);
-
-void	ft_putnbr_fd(int nb, int fd)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	if (nb == -2147483648)
+	char	*full;
+	int		i;
+	int		j;
+
+	if (!s2)
+		return (s1);
+	full = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
+	i = 0;
+	j = 0;
+	while (s1 && s1[i])
 	{
-		ft_putchar_fd('-', fd);
-		ft_putchar_fd('2', fd);
-		ft_putnbr_fd(147483648, fd);
-		return ;
+		full[i] = s1[i];
+		i++;
 	}
-	if (nb < 0)
+	while (s2[j] != 0)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putnbr_fd(-nb, fd);
-		return ;
+		full[i + j] = s2[j];
+		j++;
 	}
-	if (nb > 9)
-	{
-		ft_putnbr_fd(nb / 10, fd);
-		ft_putnbr_fd(nb % 10, fd);
-	}
-	if (nb <= 9)
-		ft_putchar_fd(nb + 48, fd);
+	full[i + j] = 0;
+	if (s1)
+		free(s1);
+	return (full);
 }

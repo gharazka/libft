@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gharazka <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 14:47:45 by gharazka          #+#    #+#             */
-/*   Updated: 2023/10/26 22:51:24 by gharazka         ###   ########.fr       */
+/*   Created: 2023/11/16 20:44:09 by gharazka          #+#    #+#             */
+/*   Updated: 2023/11/16 20:44:27 by gharazka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_putunbr_fd(unsigned int nb, int fd, int len)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
+	if (nb > 9)
 	{
-		if ((unsigned char)s[i] == (unsigned char)c)
-		{
-			return ((char *)&s[i]);
-		}
-		i++;
+		len++;
+		len = ft_putunbr_fd(nb / 10, fd, len);
+		ft_putunbr_fd(nb % 10, fd, len);
 	}
-	if (s[i] == c)
-		return ((char *)&s[i]);
-	return (NULL);
+	if (nb <= 9)
+	{
+		len++;
+		ft_putchar_fd(nb + 48, fd);
+	}
+	return (len);
 }

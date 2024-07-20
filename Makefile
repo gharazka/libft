@@ -1,24 +1,37 @@
 CFLAGS = -Wall -Wextra -Werror -c
 
-SOURCES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_toupper.c ft_tolower.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_strjoin.c ft_strncmp.c ft_atoi.c ft_split.c ft_strchr.c ft_strrchr.c ft_substr.c ft_strmapi.c ft_striteri.c ft_strnstr.c ft_strtrim.c ft_strdup.c ft_memset.c ft_bzero.c ft_memchr.c ft_calloc.c ft_strlcpy.c ft_itoa.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_memcpy.c ft_memmove.c ft_memcmp.c ft_strlcat.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+SOURCES = src/ft_isalpha.c src/ft_isdigit.c src/ft_isalnum.c src/ft_isascii.c src/ft_isprint.c src/ft_strlen.c \
+src/ft_toupper.c src/ft_tolower.c src/ft_putchar_fd.c src/ft_putstr_fd.c src/ft_putendl_fd.c src/ft_putnbr_fd.c \
+src/ft_putcaphex_fd.c src/ft_puthex_fd.c src/ft_putmemory_fd.c src/ft_putunbr_fd.c src/ft_strmapi.c src/ft_striteri.c \
+src/ft_strnstr.c src/ft_strtrim.c src/ft_strdup.c src/ft_memset.c src/ft_bzero.c src/ft_strjoin.c src/ft_strncmp.c \
+src/ft_atoi.c src/ft_split.c src/ft_strchr.c src/ft_strrchr.c src/ft_substr.c src/ft_memchr.c src/ft_strlcpy.c \
+src/ft_itoa.c src/ft_memcpy.c src/ft_memmove.c src/ft_memcmp.c src/ft_strlcat.c src/ft_findchar.c \
+src/ft_lstlast.c src/ft_lstadd_back.c src/ft_lstnew.c src/ft_lstadd_front.c src/ft_lstsize.c src/ft_lstdelone.c \
+src/ft_lstclear.c src/ft_lstiter.c src/ft_lstmap.c src/ft_calloc.c src/get_next_line.c src/ft_printf.c
 
 OBJECTS = ${SOURCES:.c=.o}
+
+INCLUDES = -I inc/
 
 NAME = libft.a
 
 
-all: ${NAME}
+all: run
+
+run: ${NAME}
+	@cc -Wall -Wextra -Werror gnl_main.c $^ -o gnl_program
+	@./gnl_program
 
 .c.o:
-	cc $(CFLAGS) $< -o ${<:.c=.o}
+	@cc $(CFLAGS) $(INCLUDES) $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJECTS}
-	ar rcs ${NAME} ${OBJECTS}
+	@ar rcs $@ $^
 
 clean:
-	rm -f ${OBJECTS}
+	@rm -f ${OBJECTS}
 
 fclean: clean
-	rm -f ${NAME}
+	@rm -f ${NAME}
 
-re: fclean all
+re: fclean all run
