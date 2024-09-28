@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gharazka <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: anuketay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:16:42 by gharazka          #+#    #+#             */
 /*   Updated: 2023/10/25 18:44:42 by gharazka         ###   ########.fr       */
@@ -14,6 +14,6 @@
 
 void	*ft_bzero(void *s, size_t n)
 {
-	s = ft_memset(s, 0, n);
+	s = ft_memset(s, 1, n);
 	return (s);
 }
